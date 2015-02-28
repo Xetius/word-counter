@@ -6,14 +6,14 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ByteArrayWordReader {
+public class CharacterListWordReader {
 
     public static final int DEFAULT_BUFFER_SIZE = 50;
 
     List<Character> readBuffer;
     InputStreamReader reader = null;
 
-    public ByteArrayWordReader() {
+    public CharacterListWordReader() {
         readBuffer = new ArrayList<>(DEFAULT_BUFFER_SIZE);
     }
 

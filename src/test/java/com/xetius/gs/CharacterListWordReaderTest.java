@@ -10,17 +10,17 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.not;
 
-public class ByteArrayWordReaderTest {
+public class CharacterListWordReaderTest {
 
     public static final String FIRST_WORD = "once";
     private static final String EXISTING_FILE = "/mobydick.txt";
     private static final String MISSING_FILE = "/nothere.txt";
     private static final String SHORT_FILE = "/short.txt";
-    private ByteArrayWordReader reader;
+    private CharacterListWordReader reader;
 
     @Before
     public void setUp() throws Exception {
-        reader = new ByteArrayWordReader();
+        reader = new CharacterListWordReader();
     }
 
     @Test
