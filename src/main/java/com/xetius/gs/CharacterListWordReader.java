@@ -9,22 +9,21 @@ import java.util.List;
 public class CharacterListWordReader {
 
     public static final int DEFAULT_BUFFER_SIZE = 50;
-
     List<Character> readBuffer;
     InputStreamReader reader = null;
+    private boolean endOfFile = false;
 
     public CharacterListWordReader() {
         readBuffer = new ArrayList<>(DEFAULT_BUFFER_SIZE);
     }
 
-    public boolean open(final String fileName) {
-        final InputStream resourceAsStream = getClass().getResourceAsStream(fileName);
+    public boolean open(final InputStream stream) {
 
-        if (resourceAsStream == null) {
+        if (stream == null) {
             return false;
         }
 
-        reader = new InputStreamReader(resourceAsStream);
+        reader = new InputStreamReader(stream);
         return true;
     }
 
@@ -36,10 +35,15 @@ public class CharacterListWordReader {
             if (Character.isLetter(nextValue)) {
                 readBuffer.add(Character.toLowerCase((char) nextValue));
             } else {
-                break;
+                return readBuffer;
             }
         }
+
+        endOfFile = true;
         return readBuffer;
     }
 
+    public boolean isEndOfFile() {
+        return endOfFile;
+    }
 }

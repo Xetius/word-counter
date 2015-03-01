@@ -3,6 +3,7 @@ package com.xetius.gs;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.InputStream;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -25,31 +26,36 @@ public class CharacterListWordReaderTest {
 
     @Test
     public void openingFileReturnsTrue() throws Exception {
-        assertThat(reader.open(EXISTING_FILE), equalTo(true));
+        final InputStream stream = this.getClass().getResourceAsStream(EXISTING_FILE);
+        assertThat(reader.open(stream), equalTo(true));
     }
 
     @Test
     public void openingMissingFileReturnsFalse() throws Exception {
-        assertThat(reader.open(MISSING_FILE), equalTo(false));
+        final InputStream stream = this.getClass().getResourceAsStream(MISSING_FILE);
+        assertThat(reader.open(stream), equalTo(false));
     }
 
     @Test
     public void getReturnsWord() throws Exception {
-        reader.open(SHORT_FILE);
+        final InputStream stream = this.getClass().getResourceAsStream(SHORT_FILE);
+        reader.open(stream);
         List<Character> word = reader.get();
         assertThat(word, hasSize(4));
     }
 
     @Test
     public void getConvertsToLowercase() throws Exception {
-        reader.open(SHORT_FILE);
+        final InputStream stream = this.getClass().getResourceAsStream(SHORT_FILE);
+        reader.open(stream);
         String word = convertToString(reader.get());
         assertThat(word, equalTo(FIRST_WORD));
     }
 
     @Test
     public void multipleCallsReturnSubsequentWords() throws Exception {
-        reader.open(SHORT_FILE);
+        final InputStream stream = this.getClass().getResourceAsStream(SHORT_FILE);
+        reader.open(stream);
         String firstWord = convertToString(reader.get());
         String secondWord = convertToString(reader.get());
 
