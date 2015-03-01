@@ -62,6 +62,20 @@ public class CharacterListWordReaderTest {
         assertThat(firstWord, not(equalTo(secondWord)));
     }
 
+    @Test
+    public void endOfFileOnlySetAtEndOfFile() throws Exception {
+        final InputStream stream = this.getClass().getResourceAsStream(SHORT_FILE);
+        reader.open(stream);
+
+        for (int index = 0; index < 13; index++) {
+            reader.get();
+            assertThat(reader.isEndOfFile(), equalTo(false));
+        }
+
+        reader.get();
+        assertThat(reader.isEndOfFile(), equalTo(true));
+    }
+
     private String convertToString(final List<Character> array) {
         StringBuilder builder = new StringBuilder();
 
